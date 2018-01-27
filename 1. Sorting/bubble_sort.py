@@ -2,9 +2,9 @@ from random import *
 
 def bubbleSort(arr):
     j = 0
-    for i in range(0, len(arr) - (1+j)):
+    while True:
         flag = 0
-        for i in range(0, len(arr)-1):
+        for i in range(0, len(arr)-(1+j)):
             if arr[i]>arr[i+1]:
                 temp = arr[i]
                 arr[i] = arr[i+1]
