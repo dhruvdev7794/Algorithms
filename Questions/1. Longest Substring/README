@@ -1,0 +1,7 @@
+Given a string, find the longest substring without repeating characters.
+
+Examples:
+
+Given "abcabcbb", the answer is "abc"
+Given "bbbbb", the answer is "b"
+Given "pwwkew", the answer is "wke"
