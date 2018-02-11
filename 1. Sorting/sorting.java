@@ -115,5 +115,9 @@ public class Sorting {
 		mergeSort.mergeSort(arr3, 0, arr3.length-1);
 		printArr(arr3);
 	}
+	
+//  9  12  13  23  54  56  
+// 	9  12  12  13  23  45  54  56  
+// 	9  12  13  23  23  43  54  56  99  
 
 }
