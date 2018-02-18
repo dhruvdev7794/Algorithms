@@ -1,3 +1,3 @@
-## 1. Sorting Algorithms
-## Important questions
-## Tree operation programs
+* 1. Sorting Algorithms
+* Important questions
+* Tree operation programs
