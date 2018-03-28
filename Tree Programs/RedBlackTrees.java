@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 public class RedBlackTrees {
 	
@@ -139,15 +140,16 @@ public class RedBlackTrees {
 	
 	///// SEARCH FOR NODE IN TREE //////
 	public Node search(int key) {
-		while(root!=null) {
-			if(root.key> key) {
-				root = root.left;
+		Node node = root;
+		while(node!=null) {
+			if(node.key> key) {
+				node = node.left;
 			}
-			else if(root.key < key) {
-				root = root.right;
+			else if(node.key < key) {
+				node = node.right;
 			}
 			else {
-				return root;
+				return node;
 			}
 		}
 		return null;
@@ -175,6 +177,7 @@ public class RedBlackTrees {
 		if(node == null) {
 			return null;
 		}
+		
 		if(node.left != null) {
 			return findMin(node.left);
 		}
@@ -188,10 +191,11 @@ public class RedBlackTrees {
 	
 	////// FIND MAX IN NODE ///////
 	public Node findMax() {
-		while (root!=null && root.right != null) {
-			root = root.right;
+		Node node = root;
+		while (node!=null && node.right != null) {
+			node = node.right;
 		}
-		return root;
+		return node;
 	}
 	// overloaded
 	public Node findMax(Node node) {
@@ -203,10 +207,11 @@ public class RedBlackTrees {
 	
 	//////FIND MAX IN NODE ///////
 	public Node findMin() {
-		while(root != null && root.left != null) {
-			root = root.left;
+		Node node = root;
+		while(node != null && node.left != null) {
+			node = node.left;
 		}
-		return root;
+		return node;
 	}
 	// overloaded
 	public Node findMin(Node node) {
@@ -218,108 +223,106 @@ public class RedBlackTrees {
 	
 	// DISPLAY IN SORTED ORDER/INORDER //
 	void inOrder() {
-		displayInOrder(root);
+		Node node = root;
+		displayInOrder(node);
 	}
-	void displayInOrder(Node root) {
-		if(root != null) {
-			displayInOrder(root.left);
-			System.out.println(root.key + " has parent " + ((root.p == null) ? null : root.p.key) + " with color "+ root.color);
-			displayInOrder(root.right);
+	void displayInOrder(Node node) {
+		if(node != null) {
+			displayInOrder(node.left);
+			System.out.println(node.key + " has parent " + ((node.p == null) ? null : node.p.key) + " with color "+ node.color);
+			displayInOrder(node.right);
 		}
 	}
 	
-	public void insert_items_initial() {
-		insert(new Node(11));
-		insert(new Node(2));
-		insert(new Node(14));
-		insert(new Node(1));
-		insert(new Node(7));
-		insert(new Node(15));
-		insert(new Node(5));
-		insert(new Node(8));
-		inOrder();
-	}
-	public void insert_items_final() {
-		insert(new Node(11));
-		insert(new Node(2));
-		insert(new Node(14));
-		insert(new Node(1));
-		insert(new Node(7));
-		insert(new Node(15));
-		insert(new Node(5));
-		insert(new Node(8));
-		insert(new Node(4));
-		inOrder();
-	}
-	public void insert_items_pred() {
-		insert(new Node(10));
-		insert(new Node(5));
-		insert(new Node(15));
-		insert(new Node(3));
-		insert(new Node(7));
-		insert(new Node(25));
-		insert(new Node(9));
+	public void insert_items(int[] numberArr) {
+		for(int num : numberArr) {
+			insert(new Node(num));
+		}
 		inOrder();
 	}
 	
-	
-	
+	public void insert_item(int number) {
+		insert(new Node(number));
+		inOrder();
+	}
 	
 	public static void main(String [] args) {
 		System.out.println("--------------------- INITIAL TREE -------------------");
 		RedBlackTrees rbt_initial = new RedBlackTrees();
-		
-		rbt_initial.insert_items_initial();
-		System.out.println("-------------------- INSERT 4 ---------------------");
-		RedBlackTrees rbt_final = new RedBlackTrees();
-		rbt_final.insert_items_final();
-		
-		System.out.println("--------------------- FIND MIN ---------------------");
-		RedBlackTrees rbt_findMin = new RedBlackTrees();
-		rbt_findMin.insert_items_final();
-		Node min = rbt_findMin.findMin();
-		if(min == null)
-			System.out.println("No minimum");
-		else
-			System.out.println(min.key);
-		
-		System.out.println("--------------------- FIND MAX ---------------------");
-		RedBlackTrees rbt_findMax = new RedBlackTrees();
-		rbt_findMax.insert_items_final();
-		Node max = rbt_findMax.findMax();
-		if(max == null)
-			System.out.println("No max");
-		else
-			System.out.println(max.key);
-		
-		
-		System.out.println("--------------------- SEARCH ---------------------");
-		RedBlackTrees rbt_search = new RedBlackTrees();
-		rbt_search.insert_items_final();
-		Node node = rbt_search.search(14);
-		if(node == null)
-			System.out.println("Item not found");
-		else
-			System.out.println(node);
-		
-		System.out.println("--------------------- Successor ---------------------");
-		RedBlackTrees rbt_successor = new RedBlackTrees();
-		rbt_successor.insert_items_pred();
-		Node successor = rbt_successor.successor(9);
-		if(successor == null)
-			System.out.println("No successor");
-		else
-			System.out.println(successor.key);
-		
-		System.out.println("--------------------- Predecessor ---------------------");
-		RedBlackTrees rbt_predecessor = new RedBlackTrees();
-		rbt_predecessor.insert_items_final();
-		Node predecessor = rbt_predecessor.predecessor(5);
-		if(predecessor == null)
-			System.out.println("No predecessor");
-		else
-			System.out.println(predecessor.key);
+		rbt_initial.insert_items(new int[] {11,2,14,1,7,15,5,8});
+		while(true) {
+			System.out.println("Press 1: Insert");
+			System.out.println("Press 2: Find Min");
+			System.out.println("Press 3: Find Max");
+			System.out.println("Press 4: Search");
+			System.out.println("Press 5: Get Successor");
+			System.out.println("Press 6: Get Predecessor");
+			System.out.println("Press 7: Exit");
+			
+			Scanner sc = new Scanner(System.in);
+			int n = sc.nextInt();
+			if(n == 7) {
+				System.out.println("Exited!!");
+				break;
+			}
+			else {
+				try {
+					switch(n) {
+					case 1:
+						System.out.print("Enter the number to be inserted");
+						Scanner insert =  new Scanner(System.in);
+						rbt_initial.insert_item(insert.nextInt());	
+						break;
+					case 2:
+						Node min = rbt_initial.findMin();
+						if(min == null)
+							System.out.println("No minimum");
+						else
+							System.out.println(min.key);
+						break;
+					case 3:
+						Node max = rbt_initial.findMax();
+						if(max == null)
+							System.out.println("No max");
+						else
+							System.out.println(max.key);
+						break;
+					case 4:
+						System.out.print("Enter the number to be searched");
+						Scanner search = new Scanner(System.in);
+						Node node = rbt_initial.search(search.nextInt());
+						if(node == null)
+							System.out.println("Item not found");
+						else
+							System.out.println(node.key);
+						break;
+					case 5:
+						System.out.print("Enter the number whose successor you are looking for");
+						Scanner successor = new Scanner(System.in);
+						Node successorNode = rbt_initial.successor(successor.nextInt());
+						if(successorNode == null)
+							System.out.println("No successor");
+						else
+							System.out.println(successorNode.key);
+						break;
+					case 6:
+						System.out.print("Enter the number whose predecessor you are looking for");
+						Scanner predecessor = new Scanner(System.in);
+						Node predecessorNode = rbt_initial.predecessor(predecessor.nextInt());
+						if(predecessorNode == null)
+							System.out.println("No predecessor");
+						else
+							System.out.println(predecessorNode.key);
+						break;
+					default:
+						System.out.println("Invalid option");
+					}
+				}
+				catch(Exception e) {
+					System.out.println("Invalid input");
+				}
+			}
+		}
 	}
-	
 }
 
