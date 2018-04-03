@@ -1,5 +1,3 @@
-package bitch;
-
 public class Sorting {
 	
 	// insertion Sort
